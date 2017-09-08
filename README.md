@@ -2,7 +2,12 @@
 A python script that randomizes the mapcycle for any Garry's Mod server
 
 ## Installation
-First check if python is already installed, make sure its python 3.5 or later
+First clone the repo
+```
+git clone https://github.com/duecknoah/gmod-mapcycle-randomizer
+```
+Next move gmod_mapcycle_rand.py into the root directory of your server.
+Then check if python is already installed, make sure its python 3.5 or later
 ```
 python -V
 ```
