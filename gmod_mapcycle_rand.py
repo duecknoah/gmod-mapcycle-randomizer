@@ -37,7 +37,7 @@ mapcycleDefaultPath = "garrysmod/cfg/mapcycle.txt"
 lines = []
 
 #Intro
-print("*** GMOD mapcycle randomizer by Noah Dueck (https://github.com/duecknoah) ***")
+print("*** GMOD mapcycle randomizer (https://github.com/duecknoah/gmod-mapcycle-randomizer) ***")
 
 # Get user to decide how to open map
 while (not mapCycleOpenedSuccessfully):
