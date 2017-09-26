@@ -15,15 +15,7 @@ First clone the repo
 git clone https://github.com/duecknoah/gmod-mapcycle-randomizer
 ```
 Next move gmod_mapcycle_rand.py into the root directory of your server.
-Then check if python is already installed, make sure its python 3.5 or later
-```
-python -V
-```
-If that doesn't work or it gives an earlier version, try:
-```
-python3 -V
-```
-If that doesn't work, then install python using the following:
+Then install python 3 using the following:
 #### Linux
 ```
 sudo apt-get install python3
