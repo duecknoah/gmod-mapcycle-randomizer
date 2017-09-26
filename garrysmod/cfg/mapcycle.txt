@@ -4,26 +4,12 @@
 // this is an example, note that any
 // commmented lines will ignored and won't be randomized
 //
-ttt_suburb_beta15a
-ttt_minecraft_expedition
-ttt_cquest
-ttt_vessel
-ttt_innocentmotel_v1
-ttt_bunker
-ttt_community_bowling_v5a
-ttt_abyss
-ttt_67thway_v6
-ttt_theship_v1
-ttt_bb_suburbia_b3
-ttt_airbus_b3
-ttt_mc_skyislands
-ttt_nether_fix
-ttt_minecraft_village_v1m6
-ttt_dolls
-ttt_casino_b2
-ttt_coder
 ttt_stargate_v3
-ttt_clue_se
-ttt_roy_the_ship
-ttt_bb_teenroom_b2
 ttt_manorhouse
+ttt_bb_suburbia_b3
+ttt_coder
+ttt_roy_the_ship
+ttt_cquest
+ttt_community_bowling_v5a
+ttt_suburb_beta15a
+ttt_dolls

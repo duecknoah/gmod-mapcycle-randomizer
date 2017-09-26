@@ -10,48 +10,57 @@ It is stored in /garrysmod/cfg/mapcycle.txt
 '''
 import random
 
-# Shuffles a list while ignoring comments (//)
-def shuffle(list):
+def shuffle(map_list):
+    """Shuffles a list while ignoring comments (//)"""
     # Allowed indexes is the line numbers that are not commented out
-    allowedIndexes = []
+    allowed_indexes = []
     # go through and put the indexes of the lines in the list
     # that do not start with //
-    for i in range(len(list)):
-        currentLine = list[i]
-        if (currentLine.find('//') == -1):
-            allowedIndexes.append(i)
+    for i, item in enumerate(map_list):
+        current_line = item
+        if current_line.find('//') == -1:
+            allowed_indexes.append(i)
     # randomize!
-    for i in range(len(allowedIndexes)):
+    for i, item in enumerate(allowed_indexes):
         # Choose random index within the allowed indexes
-        currentLineIndex = allowedIndexes[i]
-        otherLineIndex = allowedIndexes[int(random.randrange(0, len(allowedIndexes) - 1))]
+        current_line_index = item
+        other_line_index = allowed_indexes[int(random.randrange(0, len(allowed_indexes) - 1))]
         # Swap the the other line with the current line
-        hold = list[currentLineIndex]
-        list[currentLineIndex] = list[otherLineIndex]
-        list[otherLineIndex] = hold
-    return list
+        hold = map_list[current_line_index]
+        map_list[current_line_index] = map_list[other_line_index]
+        map_list[other_line_index] = hold
+    return map_list
 
 
-mapCycleOpenedSuccessfully = False
-mapcycleDefaultPath = "garrysmod/cfg/mapcycle.txt"
+map_cycle_opened_successfully = False
+map_cycle_default_path = "garrysmod/cfg/mapcycle.txt"
 lines = []
 
 #Intro
 print("*** GMOD mapcycle randomizer (https://github.com/duecknoah/gmod-mapcycle-randomizer) ***")
 
 # Get user to decide how to open map
-while (not mapCycleOpenedSuccessfully):
-    mapcyclePath = input("File name (with file path and extension) of mapcycle: (default: {}) ".format(mapcycleDefaultPath))
+while not map_cycle_opened_successfully:
+    map_cycle_path = input("File name (with file path and extension)"
+                           " of mapcycle: (default: {}) ".format(map_cycle_default_path))
 
-    if mapcyclePath == "":
-        mapcyclePath = mapcycleDefaultPath
-        print("Using default path", mapcycleDefaultPath)
+    if map_cycle_path == "":
+        map_cycle_path = map_cycle_default_path
+        print("Using default path", map_cycle_default_path)
     try:
         # Attempt to Read file and Split lines into separate strings in a list
-        with open(mapcyclePath, "r+") as mapcycleFile:
-            lines = mapcycleFile.readlines()
-        mapcycleFile.close()
-        mapCycleOpenedSuccessfully = True
+        with open(map_cycle_path, "r+") as map_cycle_file:
+            lines = map_cycle_file.readlines()
+        map_cycle_file.close()
+        map_cycle_opened_successfully = True
+
+        # If there is no newline at end of file, add one
+        last_line_index = len(lines) - 1
+        last_line = lines[last_line_index]
+        last_char = last_line[len(last_line) - 1]
+        if last_char != '\n':
+            lines[last_line_index] += '\n'
+
     except FileNotFoundError:
         print("File not found")
     except IOError:
@@ -60,18 +69,18 @@ while (not mapCycleOpenedSuccessfully):
 # Reorder list randomly, do not affect commented lines
 print("randomizing ... ", end="")
 lines = shuffle(lines)
-allData = ""
+all_data = ""
 for i in lines:
-    allData += i
+    all_data += i
 
 # re-write randomized mapcycle file to the mapCyclePath
 try:
-    mapcycleFile = open(mapcyclePath, "wb")
-    mapcycleFile.write(bytes(allData, 'UTF-8'))
+    map_cycle_file = open(map_cycle_path, "wb")
+    map_cycle_file.write(bytes(all_data, 'UTF-8'))
     print("mapcycle randomized successfully.")
 except FileNotFoundError:
     print("File not found, aborting ...")
 except IOError:
     print("IOError with mapcycle.txt file, aborting ...")
 finally:
-    mapcycleFile.close()
+    map_cycle_file.close()
