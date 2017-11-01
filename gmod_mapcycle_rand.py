@@ -9,6 +9,7 @@ The mapcycle of gmod (mapcycle.txt) comes part of just about every gmod server b
 It is stored in /garrysmod/cfg/mapcycle.txt
 '''
 import random
+import sys
 
 def shuffle(map_list):
     """Shuffles a list while ignoring comments (//)"""
@@ -31,18 +32,25 @@ def shuffle(map_list):
         map_list[other_line_index] = hold
     return map_list
 
+if __name__ == '__main__':
+    map_cycle_opened_successfully = False
+    map_cycle_default_path = "garrysmod/cfg/mapcycle.txt"
+    lines = []
 
-map_cycle_opened_successfully = False
-map_cycle_default_path = "garrysmod/cfg/mapcycle.txt"
-lines = []
+    #Intro
+    print("*** GMOD mapcycle randomizer (https://github.com/duecknoah/gmod-mapcycle-randomizer) ***")
 
-#Intro
-print("*** GMOD mapcycle randomizer (https://github.com/duecknoah/gmod-mapcycle-randomizer) ***")
+    # If no arguments entered, make user manually enter mapcycle path.
+    # If 2 arguments entered, use arg[1] as mapcycle path
+    # Else throw an error as too many arguments were passed
+    if len(sys.argv) < 2:
+        map_cycle_path = input("File name (with file path and extension)"
+                               " of mapcycle: (default: {}) ".format(map_cycle_default_path))
+    elif len(sys.argv) == 2:
+        map_cycle_path = sys.argv[1]
+    else:
+        raise ValueError('Too many arguments entered, usage: python3 gmod_mapcycle_rand.py path/to/mapcycle')
 
-# Get user to decide how to open map
-while not map_cycle_opened_successfully:
-    map_cycle_path = input("File name (with file path and extension)"
-                           " of mapcycle: (default: {}) ".format(map_cycle_default_path))
 
     if map_cycle_path == "":
         map_cycle_path = map_cycle_default_path
@@ -62,25 +70,28 @@ while not map_cycle_opened_successfully:
             lines[last_line_index] += '\n'
 
     except FileNotFoundError:
-        print("File not found")
+        print("***** mapcycle file not found, unable to randomize file. *****")
+        exit(2)
     except IOError:
-        print("IO error, try again")
+        print("***** IO error, unable to randomize file. *****")
+        exit(3)
 
-# Reorder list randomly, do not affect commented lines
-print("randomizing ... ", end="")
-lines = shuffle(lines)
-all_data = ""
-for i in lines:
-    all_data += i
+    # Reorder list randomly, do not affect commented lines
+    print("randomizing ... ", end="")
+    lines = shuffle(lines)
+    all_data = ""
+    for i in lines:
+        all_data += i
 
-# re-write randomized mapcycle file to the mapCyclePath
-try:
-    map_cycle_file = open(map_cycle_path, "wb")
-    map_cycle_file.write(bytes(all_data, 'UTF-8'))
-    print("mapcycle randomized successfully.")
-except FileNotFoundError:
-    print("File not found, aborting ...")
-except IOError:
-    print("IOError with mapcycle.txt file, aborting ...")
-finally:
-    map_cycle_file.close()
+    # re-write randomized mapcycle file to the mapCyclePath
+    map_cycle_file = None
+    try:
+        map_cycle_file = open(map_cycle_path, "wb")
+        map_cycle_file.write(bytes(all_data, 'UTF-8'))
+        print("mapcycle randomized successfully.")
+    except FileNotFoundError:
+        print("File not found, aborting ...")
+    except IOError:
+        print("IOError with mapcycle.txt file, aborting ...")
+    finally:
+        map_cycle_file.close()

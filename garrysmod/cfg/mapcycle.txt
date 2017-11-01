@@ -5,11 +5,11 @@
 // commmented lines will ignored and won't be randomized
 //
 ttt_stargate_v3
-ttt_manorhouse
 ttt_bb_suburbia_b3
-ttt_coder
 ttt_roy_the_ship
-ttt_cquest
 ttt_community_bowling_v5a
 ttt_suburb_beta15a
+ttt_coder
+ttt_manorhouse
 ttt_dolls
+ttt_cquest
