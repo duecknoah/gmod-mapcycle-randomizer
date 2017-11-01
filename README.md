@@ -1,38 +1,36 @@
 # gmod-mapcycle-randomizer
-A python script that randomizes the mapcycle for any Garry's Mod server
-## Installation Simple (GUI)
-- Click the 'Clone or download' button and download ZIP
-- Open the downloaded ZIP file and drag gmod_mapcycle_rand.py into your Garry's Mod server folder
-- Go to the link below and download the latest version of python 3: https://www.python.org/downloads/
-- Make this the first line in your start_server.sh file for your server:
+A Python script that randomizes the mapcycle for any Garry's Mod server.
+## Setup Simple (GUI)
+1. Click the 'Clone or download' button and download ZIP
+2. Open the downloaded ZIP file and move gmod_mapcycle_rand.py into your Garry's Mod server folder
+3. Go to the link below and download the latest version of python 3: https://www.python.org/downloads/
+4. Make this the first line in your start_server.sh file for your server:
 ```
 python3 gmod_mapcycle_rand.py
 ```
 
-## Installation command-line
-First clone the repo
+## Setup command-line
+Clone the repo
 ```
 git clone https://github.com/duecknoah/gmod-mapcycle-randomizer
 ```
-Next move gmod_mapcycle_rand.py into the root directory of your server.
+Move __gmod_mapcycle_rand.py__ into your __server directory__.
 Then install python 3 using the following:
-#### Linux
 ```
 sudo apt-get install python3
 ```
-#### Windows or Mac
-Go to the link below and download the latest version of python 3
+Or download the latest version of python 3 here:
 https://www.python.org/downloads/
 
-## How to Use
-Run this command in the home directory of your server, or put it as the first line in your startup script:
+## Usage
+Run this command in the __root directory of your server__, or put it as the first line in your __startup script__:
 ```
-python3 gmod_mapcycle_rand.py
+python3 gmod_mapcycle_rand.py path/to/mapcycle.txt
 ```
 
 ### Example
-An example start_server.sh file using the randomizer could look like this:
+Example server startup script
 ```
-python3 gmod_mapcycle_rand.py
+python3 gmod_mapcycle_rand.py ./garrysmod/cfg/mapcycle.txt
 ./srcds_run -game garrysmod +maxplayers 12 +map gm_flatgrass +host_workshop_collection 844193892 -authkey 123456789101112131415 -mapcyclefile -port 27015
 ```
